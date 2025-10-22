@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nop</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: #d2b48c; /* nâu nhạt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  #icon {
+    font-size: 5em;
+    position: absolute;
+    user-select: none;
+  }
+  audio {
+    display: none; /* nhạc chạy ngầm */
+  }
+</style>
+</head>
+<body>
+
+<div id="icon">🍳</div>
+
+<audio autoplay loop>
+  <source src="nop.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ audio.
+</audio>
+
+<script>
+  const icon = document.getElementById('icon');
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 100);
+  let vx = 2 + Math.random()*2;
+  let vy = 2 + Math.random()*2;
+
+  function move() {
+    x += vx;
+    y += vy;
+
+    if(x < 0 || x > window.innerWidth - 50) vx = -vx;
+    if(y < 0 || y > window.innerHeight - 50) vy = -vy;
+
+    icon.style.left = x + 'px';
+    icon.style.top = y + 'px';
+
+    requestAnimationFrame(move);
+  }
+
+  move();
+
+  // update window size khi resize
+  window.addEventListener('resize', () => {
+    if(x > window.innerWidth - 50) x = window.innerWidth - 50;
+    if(y > window.innerHeight - 50) y = window.innerHeight - 50;
+  });
+</script>
+
+</body>
+</html>
